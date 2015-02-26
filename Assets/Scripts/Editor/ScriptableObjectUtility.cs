@@ -35,4 +35,13 @@ public static class ScriptableObjectUtility {
 	public static void createDialogueTree() {
 		CreateAsset <DialogueTree> ();
 	}
+
+	/// <summary>
+	/// Creates a dialogue node instance in the current directory.
+	/// </summary>
+	[MenuItem("CGP/New.../Dialogue Node")]
+	public static void createDialogueNode() {
+		CreateAsset <DialogueNode> ();
+	}
 }
+
