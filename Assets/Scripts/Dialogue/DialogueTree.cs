@@ -2,5 +2,7 @@
 using System.Collections;
 
 public class DialogueTree : ScriptableObject {
-	public DialogueNode rootNode;
+	public DialogueNode[] nodes;
+	public int currentNode;
+
 }

@@ -11,4 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4286aa0190fa7924ebac8b63f66c3f97, type: 3}
   m_Name: New DialogueTree
   m_EditorClassIdentifier: 
-  rootNode: {fileID: 11400000, guid: d03aaa2fd8e86ce45832746431884957, type: 2}
+  nodes:
+  - name: This is a name
+    text: HELP I'M TRAPPED IN A NODE FACTORY!
+    sound: {fileID: 0}
+    lengthOfTime: 0
+  - name: 
+    text: 
+    sound: {fileID: 0}
+    lengthOfTime: 0
+  currentNode: 0
