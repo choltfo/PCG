@@ -69,12 +69,12 @@ public class EditorDialogue : EditorWindow {
 
 
 	void OnGUI () {
-		names = getNames();
-		
 		EditorGUI.LabelField (new Rect(0,0,position.width,20),"Dialogue Editor");
 		dia = (DialogueTree)EditorGUI.ObjectField (new Rect(0,15,200,15),"", dia, typeof(DialogueTree), false);
 		
 		if (dia == null) return;
+		
+		names = getNames();
 		
 		DiaBox = new Rect (5, 35, position.width - 10, position.height - 40);
 
@@ -82,8 +82,10 @@ public class EditorDialogue : EditorWindow {
 		
 		BeginWindows();
 		for (int i = 0; i < dia.nodes.Length; i++) {
+			dia.nodes[i].nextNode = dia.nodes[i].nextNode % dia.nodes.Length;
+			
 			dia.nodes[i].nodePos = GUI.Window(i,dia.nodes[i].nodePos, nodeWindow,"");
-			if (i!= 0) Drawing.curveFromTo(dia.nodes[0].nodePos, dia.nodes[i].nodePos,
+			Drawing.curveFromTo(dia.nodes[i].nodePos, dia.nodes[dia.nodes[i].nextNode].nodePos,
 			                    Color.green, new Color(0,0,0,0));
 		}
 		//(dia.nodes[i], DiaBox, 0, 0)
@@ -101,8 +103,19 @@ public class EditorDialogue : EditorWindow {
 	void nodeWindow(int i) {
 		GUI.Label(new Rect(0,0,boxWidth,boxHeight), dia.nodes[i].name);
 		//dia.nodes[i].nextNode = GUI.Toolbar(new Rect(5,10,boxWidth-10, 20), dia.nodes[i].nextNode, names);
-		dia.nodes[i].nextNode = GUI.SelectionGrid(new Rect(5,10,boxWidth-10, 20), dia.nodes[i].nextNode, names, 10);
+		dia.nodes[i].nextNode = GUI.SelectionGrid(new Rect(1,15,boxWidth-1, boxHeight-15), dia.nodes[i].nextNode, names, 2);
+		if (GUI.Button(new Rect(boxWidth-11,0,10,10), "x")) removeItem(i);
 		GUI.DragWindow();
+	}
+	
+	void removeItem (int j) {
+		for (int i = j+1; i < dia.nodes.Length; i++) dia.nodes[i] = dia.nodes[i-1];
+		// TODO: THIS WILL BREAK EVVVVVVERYTHING LATER!
+		for (int i = 0; i < dia.nodes.Length; i++) {
+			if (dia.nodes[i].nextNode == j) dia.nodes[i].nextNode = i;
+			if (dia.nodes[i].nextNode > i) dia.nodes[i].nextNode --;
+		}
+		System.Array.Resize<DialogueNode>(ref dia.nodes, dia.nodes.Length-1);
 	}
 }
 

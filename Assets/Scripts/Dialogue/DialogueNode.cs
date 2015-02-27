@@ -3,7 +3,7 @@ using System.Collections;
 
 //TODO: Note http://forum.unity3d.com/threads/access-variable-by-string-name.42487/. Use for parameters on outlinks.
 [System.Serializable]
-public class DialogueNode : ScriptableObject {
+public class DialogueNode {
 	/// Simple name for the node, since a long line is hard to show in editor.
 	public string name = "DATA";
 

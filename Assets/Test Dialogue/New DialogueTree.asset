@@ -12,12 +12,26 @@ MonoBehaviour:
   m_Name: New DialogueTree
   m_EditorClassIdentifier: 
   nodes:
-  - name: This is a name
-    text: HELP I'M TRAPPED IN A NODE FACTORY!
-    sound: {fileID: 0}
-    lengthOfTime: 0
-  - name: 
+  - name: HELP I'M TRAPPED IN A NODE FACTORY
     text: 
     sound: {fileID: 0}
+    nextNode: 1
     lengthOfTime: 0
+    nodePos:
+      serializedVersion: 2
+      x: 333
+      y: 33
+      width: 302
+      height: 100
+  - name: SO AM I!
+    text: 
+    sound: {fileID: 0}
+    nextNode: 0
+    lengthOfTime: 0
+    nodePos:
+      serializedVersion: 2
+      x: 319
+      y: 182
+      width: 302
+      height: 100
   currentNode: 0
