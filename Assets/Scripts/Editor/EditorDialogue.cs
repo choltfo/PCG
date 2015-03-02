@@ -74,7 +74,13 @@ public class EditorDialogue : EditorWindow {
 		
 		if (dia == null) return;
 		
+		if (GUI.Button(new Rect(200,15,200,20), "Add node.")) addItem(); 
+		
 		names = getNames();
+		
+		
+		//new Rect(1,15,boxWidth-1, boxHeight-15)
+		boxHeight = 15+(dia.nodes.Length/2)*15;
 		
 		DiaBox = new Rect (5, 35, position.width - 10, position.height - 40);
 
@@ -106,6 +112,12 @@ public class EditorDialogue : EditorWindow {
 		dia.nodes[i].nextNode = GUI.SelectionGrid(new Rect(1,15,boxWidth-1, boxHeight-15), dia.nodes[i].nextNode, names, 2);
 		if (GUI.Button(new Rect(boxWidth-11,0,10,10), "x")) removeItem(i);
 		GUI.DragWindow();
+	}
+	
+	void addItem () {
+		System.Array.Resize<DialogueNode>(ref dia.nodes, dia.nodes.Length+1);
+		dia.nodes[dia.nodes.Length-1] = new DialogueNode();
+		dia.nodes[dia.nodes.Length-1].nodePos = new Rect (100,100,boxWidth,boxHeight);
 	}
 	
 	void removeItem (int j) {
